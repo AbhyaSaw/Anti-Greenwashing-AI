@@ -1,0 +1,16 @@
+# One-click deploy on Render: New + > Blueprint > pick this GitHub repo.
+# Leave the chain variables empty for the self-contained demo chain, or fill them in
+# (Render dashboard > Environment) to anchor verdicts on a public testnet such as Sepolia.
+services:
+  - type: web
+    name: terratruth-oracle
+    runtime: docker
+    plan: free
+    healthCheckPath: /api/health
+    envVars:
+      - key: CHAIN_RPC_URL
+        sync: false
+      - key: ORACLE_PRIVATE_KEY
+        sync: false
+      - key: CONTRACT_ADDRESS
+        sync: false

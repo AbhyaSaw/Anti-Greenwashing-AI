@@ -1,6 +1,7 @@
 """TerraTruth: anti-greenwashing AI + Web3 oracle. FastAPI server."""
 import json
 import logging
+import mimetypes
 import threading
 import traceback
 from typing import Optional
@@ -17,6 +18,9 @@ from .satellite import DataError, make_grid
 
 log = logging.getLogger("terratruth")
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
+
+mimetypes.add_type("application/manifest+json", ".webmanifest")
+mimetypes.add_type("text/javascript", ".js")  # Windows registry sometimes maps .js to text/plain
 
 app = FastAPI(title="TerraTruth Oracle", version="1.0")
 STATIC = config.ROOT / "static"
@@ -72,6 +76,11 @@ def _public(p):
         out["onchain"] = None
     out["latest_job"] = {k: j[k] for k in ("id", "status", "progress")} if j else None
     return out
+
+
+@app.get("/api/health")
+def health():
+    return {"ok": CHAIN is not None, "chain": CHAIN.mode if CHAIN else None}
 
 
 @app.get("/api/chain")

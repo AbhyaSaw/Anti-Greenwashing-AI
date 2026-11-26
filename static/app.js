@@ -264,6 +264,19 @@ function renderResult(r, ch, jobId) {
   }
 }
 
+// ---------------------------------------------------------------- installable app (PWA)
+if ("serviceWorker" in navigator) navigator.serviceWorker.register("/sw.js").catch(() => {});
+let installPrompt = null;
+window.addEventListener("beforeinstallprompt", (e) => {
+  e.preventDefault(); installPrompt = e; $("#installBtn").classList.remove("hidden");
+});
+$("#installBtn").onclick = async () => {
+  if (!installPrompt) return;
+  installPrompt.prompt(); await installPrompt.userChoice; installPrompt = null;
+  $("#installBtn").classList.add("hidden");
+};
+window.addEventListener("appinstalled", () => $("#installBtn").classList.add("hidden"));
+
 async function refreshAll() { await Promise.all([refreshChain(), refreshProjects(), refreshLedger()]); }
 refreshAll();
 setInterval(refreshChain, 15000);

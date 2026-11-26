@@ -17,6 +17,8 @@ header { display: flex; justify-content: space-between; align-items: center; gap
 .brand { display: flex; gap: 10px; align-items: center; color: var(--accent); }
 .brand h1 { margin: 0; font-size: 18px; color: var(--ink); }
 .brand span { color: var(--muted); font-size: 12px; }
+.header-right { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; min-width: 0; }
+button.install { background: var(--accent); color: var(--accent-ink); border-color: var(--accent); border-radius: 999px; padding: 6px 14px; }
 .pill { font: 12px ui-monospace, Consolas, monospace; padding: 6px 10px; border: 1px solid var(--line); border-radius: 999px; color: var(--muted); max-width: 100%; overflow-wrap: anywhere; }
 main { display: grid; grid-template-columns: 360px minmax(0, 1fr); gap: 16px; padding: 16px 20px; }
 aside, .content { display: flex; flex-direction: column; gap: 16px; min-width: 0; }

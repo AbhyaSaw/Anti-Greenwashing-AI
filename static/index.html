@@ -4,6 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>TerraTruth Oracle</title>
+<meta name="theme-color" content="#1f7a4d">
+<meta name="description" content="Satellite AI verification of reforestation claims before any carbon token is minted.">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" href="icon-192.png" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="TerraTruth">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css">
 <link rel="stylesheet" href="style.css">
@@ -14,7 +22,10 @@
     <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path fill="currentColor" d="M12 2 4 13h5l-3 5h5v4h2v-4h5l-3-5h5z"/></svg>
     <div><h1>TerraTruth Oracle</h1><span>Satellite AI verification before any carbon token is minted</span></div>
   </div>
-  <div id="chainPill" class="pill">connecting to chain…</div>
+  <div class="header-right">
+    <button id="installBtn" class="install hidden" type="button">⬇ Install app</button>
+    <div id="chainPill" class="pill">connecting to chain…</div>
+  </div>
 </header>
 
 <main>
