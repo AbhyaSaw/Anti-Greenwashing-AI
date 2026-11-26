@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TerraTruth Oracle</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <div class="brand">
+    <svg viewBox="0 0 24 24" width="26" height="26" aria-hidden="true"><path fill="currentColor" d="M12 2 4 13h5l-3 5h5v4h2v-4h5l-3-5h5z"/></svg>
+    <div><h1>TerraTruth Oracle</h1><span>Satellite AI verification before any carbon token is minted</span></div>
+  </div>
+  <div id="chainPill" class="pill">connecting to chain…</div>
+</header>
+
+<main>
+  <aside>
+    <section class="card">
+      <h2>1 · Register a reforestation claim</h2>
+      <p class="hint">Draw the site on the map (polygon or rectangle tool, top-left), then enter what the developer <em>claims</em>. Registering writes the claim on-chain but mints nothing.</p>
+      <form id="projectForm">
+        <label>Project name<input name="name" required placeholder="e.g. Riverbank restoration A"></label>
+        <label>Developer wallet<select name="developer" id="devSelect"></select>
+          <input name="developerCustom" id="devCustom" placeholder="0x… (custom address)" class="hidden"></label>
+        <div class="row">
+          <label>Planting year<input name="planting_year" type="number" min="1990" max="2100" value="2019" required></label>
+          <label>Trees claimed<input name="claimed_trees" type="number" min="1" value="20000" required></label>
+        </div>
+        <label>Carbon claimed (tCO2e)<input name="claimed_tco2e" type="number" min="0.001" step="any" value="500" required></label>
+        <div id="siteInfo" class="site-info">No site drawn yet.</div>
+        <button type="submit" class="primary">Register claim on-chain</button>
+      </form>
+      <div class="goto">
+        <input id="gotoInput" placeholder="Jump to lat, lon (e.g. -3.10, 37.35)">
+        <button id="gotoBtn" type="button">Go</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Projects</h2>
+      <div id="projectList" class="project-list"><p class="hint">No projects yet.</p></div>
+    </section>
+
+    <section class="card">
+      <h2>Wallets <small>(vtCO2e balance)</small></h2>
+      <div id="wallets"></div>
+    </section>
+  </aside>
+
+  <div class="content">
+    <div id="map"></div>
+
+    <section id="auditPanel" class="card hidden">
+      <div class="audit-head">
+        <div><h2 id="auditTitle">Project</h2><div id="auditMeta" class="hint"></div></div>
+        <span id="statusBadge" class="badge">PENDING</span>
+      </div>
+      <form id="verifyForm" class="verify-form">
+        <label>Evidence source
+          <select name="source">
+            <option value="sentinel-2">Sentinel-2 satellite (real, Planetary Computer)</option>
+            <option value="synthetic:honest">Synthetic demo: honest project</option>
+            <option value="synthetic:fraud">Synthetic demo: fraudulent project</option>
+          </select></label>
+        <label>Season months <small>(optional)</small>
+          <span class="row"><input name="season_start" type="number" min="1" max="12" placeholder="from"><input name="season_end" type="number" min="1" max="12" placeholder="to"></span></label>
+        <label>Drone photo – before <small>(optional)</small><input name="drone_before" type="file" accept="image/*"></label>
+        <label>Drone photo – now <small>(optional)</small><input name="drone_after" type="file" accept="image/*"></label>
+        <button type="submit" class="primary" id="runBtn">Run AI audit &amp; submit to oracle</button>
+      </form>
+      <div id="progressWrap" class="hidden">
+        <div class="progress"><div id="progressBar"></div></div>
+        <pre id="logBox"></pre>
+      </div>
+      <div id="result"></div>
+    </section>
+
+    <section class="card">
+      <h2>On-chain ledger <small>(contract events)</small></h2>
+      <div class="table-wrap"><table id="ledger"><thead><tr><th>Block</th><th>Event</th><th>Details</th><th>Tx</th></tr></thead><tbody></tbody></table></div>
+    </section>
+  </div>
+</main>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+fastapi
+uvicorn[standard]
+python-multipart
+numpy
+scipy
+scikit-learn
+rasterio
+pillow
+pystac-client
+planetary-computer
+py-solc-x
+web3>=7,<8
+py-evm>=0.10
+eth-tester>=0.12

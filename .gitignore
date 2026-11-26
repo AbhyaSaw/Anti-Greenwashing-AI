@@ -1,0 +1,23 @@
+# Dependencies
+node_modules/
+.venv/
+venv/
+
+# Secrets / environment
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.pyc
+
+# Local runtime data (SQLite DB, evidence reports) and compiled contract cache
+data/
+build/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
