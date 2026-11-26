@@ -40,6 +40,20 @@ Tests (synthetic honest vs fraudulent project, double-mint protection, oracle-on
 .\.venv\Scripts\python.exe -m tests.test_pipeline
 ```
 
+## Run it as an app
+
+* **Windows desktop app:** double-click `TerraTruth.bat`. On the first run, it sets up Python dependencies.
+  It then starts the server and opens TerraTruth in its own Edge or Chrome app window. Close the console
+  window to stop the app.
+* **Installable app (PWA):** open the app in Chrome or Edge and click **⬇ Install app** in the header.
+  On a phone, use "Add to Home screen". The app gets its own icon and window, and its interface still loads offline.
+* **Online (public URL):** push this repo to GitHub, then go to [Render](https://render.com) and choose
+  **New + → Blueprint**. Select the repo, and `render.yaml` and the `Dockerfile` do the rest. Any Docker host also works:
+  `docker build -t terratruth . ; docker run -p 8000:8000 terratruth`.
+  Set `CHAIN_RPC_URL` and `ORACLE_PRIVATE_KEY` (for example, a Sepolia RPC and a funded test wallet) so that on-chain
+  records persist. Without them, the demo chain resets whenever the host restarts.
+  Free hosting tiers have limited RAM, so keep real Sentinel-2 audits to small sites (a few km²).
+
 ## Using the dashboard
 
 1. Use **Jump to lat, lon** or pan the map, then draw the site with the polygon or rectangle tool (top left of the map).
